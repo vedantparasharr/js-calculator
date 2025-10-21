@@ -14,6 +14,17 @@ function updateCalculation(value) {
     localStorage.setItem('calculation', calculation);
 }
 
+//evaluate calculation
+function evaluateCalc(){
+    try {
+        calculation = eval(calculation);
+    display();
+    localStorage.setItem('calculation', calculation);
+    } catch {
+        calculation = 'Error';
+        display();
+    }
+}
 // button on click
 document.querySelectorAll('.btn-number, .btn-operator').forEach((button) => {
     const value = button.dataset.value;
@@ -26,14 +37,7 @@ document.querySelectorAll('.btn-number, .btn-operator').forEach((button) => {
 
 // equals button
 document.getElementById('equals').addEventListener('click', () => {
-    try {
-        calculation = eval(calculation);
-    display();
-    localStorage.setItem('calculation', calculation);
-    } catch {
-        calculation = 'Error';
-        display();
-    }
+    evaluateCalc();
 });
 
 //clear button
@@ -45,5 +49,30 @@ document.getElementById('clear').addEventListener('click', () => {
 
 // keyboard support
 document.addEventListener("keydown", (event) => {
-    
+    const key = event.key;
+
+    if(!isNaN(key) || ['+', '-', '*', '/', '.'].includes(key)){
+        updateCalculation(key);
+        return;
+    }
+
+    if(key === 'Enter' || key === '='){
+        event.preventDefault();
+        evaluateCalc();
+        return;
+    }
+    if(key === 'Backspace'){
+        event.preventDefault();
+        calculation = calculation.slice(0, -1);
+        display();
+        localStorage.setItem('calculation', calculation);
+        return;
+    }
+    if(key === 'Escape'){
+        event.preventDefault();
+        calculation = '';
+        display();
+        localStorage.setItem('calculation', calculation);
+        return;
+    }
 })
