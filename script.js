@@ -4,7 +4,9 @@ display();
 
 //display function
 function display() {
-    document.querySelector('.display-calculate').innerHTML = `${calculation}`;
+    const displayElement = document.querySelector('.display-calculate');
+    displayElement.innerHTML = `${calculation}`;
+    displayElement.scrollLeft = displayElement.scrollWidth;
 }
 
 // update calculation
@@ -15,11 +17,12 @@ function updateCalculation(value) {
 }
 
 //evaluate calculation
-function evaluateCalc(){
+function evaluateCalc() {
     try {
         calculation = eval(calculation);
-    display();
-    localStorage.setItem('calculation', calculation);
+        calculation = calculation.toString();
+        display();
+        localStorage.setItem('calculation', calculation);
     } catch {
         calculation = 'Error';
         display();
@@ -51,24 +54,24 @@ document.getElementById('clear').addEventListener('click', () => {
 document.addEventListener("keydown", (event) => {
     const key = event.key;
 
-    if(!isNaN(key) || ['+', '-', '*', '/', '.'].includes(key)){
+    if (!isNaN(key) || ['+', '-', '*', '/', '.'].includes(key)) {
         updateCalculation(key);
         return;
     }
 
-    if(key === 'Enter' || key === '='){
+    if (key === 'Enter' || key === '=') {
         event.preventDefault();
         evaluateCalc();
         return;
     }
-    if(key === 'Backspace'){
+    if (key === 'Backspace') {
         event.preventDefault();
         calculation = calculation.slice(0, -1);
         display();
         localStorage.setItem('calculation', calculation);
         return;
     }
-    if(key === 'Escape'){
+    if (key === 'Escape') {
         event.preventDefault();
         calculation = '';
         display();
