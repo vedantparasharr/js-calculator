@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casio Style Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator">
+        <div class="calculator-title">CASIO</div>
+
+        <div class="display">
+            <div class="display-calculate"></div>
+        </div>
+
+        <div class="button-grid">
+            <!-- Row 1 -->
+            <button class="btn-number" onclick="updateCalculation('7')">7</button>
+            <button class="btn-number" onclick="updateCalculation('8')">8</button>
+            <button class="btn-number" onclick="updateCalculation('9')">9</button>
+            <button class="btn-operator" onclick="updateCalculation(' / ')">÷</button>
+
+            <!-- Row 2 -->
+            <button class="btn-number" onclick="updateCalculation('4')">4</button>
+            <button class="btn-number" onclick="updateCalculation('5')">5</button>
+            <button class="btn-number" onclick="updateCalculation('6')">6</button>
+            <button class="btn-operator" onclick="updateCalculation(' * ')">×</button>
+
+            <!-- Row 3 -->
+            <button class="btn-number" onclick="updateCalculation('1')">1</button>
+            <button class="btn-number" onclick="updateCalculation('2')">2</button>
+            <button class="btn-number" onclick="updateCalculation('3')">3</button>
+            <button class="btn-operator" onclick="updateCalculation(' - ')">−</button>
+
+            <!-- Row 4 -->
+            <button class="btn-number" onclick="updateCalculation('0')">0</button>
+            <button class="btn-number" onclick="updateCalculation('.')">.</button>
+            <button class="btn-operator" onclick="
+                calculation = eval(calculation);
+                display();
+                localStorage.setItem('calculation', calculation);
+            ">=</button>
+            <button class="btn-operator" onclick="updateCalculation(' + ')">+</button>
+
+            <!-- Row 5 -->
+            <button class="btn-clear" onclick="
+                calculation = '';
+                display();
+                localStorage.setItem('calculation', calculation);
+            ">CLEAR</button>
+        </div>
+
+        <div class="brand">fx-82MS</div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
