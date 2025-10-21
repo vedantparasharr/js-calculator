@@ -11,6 +11,7 @@ function display() {
 
 // update calculation
 function updateCalculation(value) {
+    if (calculation === 'Error') calculation = '';
     calculation += value;
     display();
     localStorage.setItem('calculation', calculation);
@@ -45,6 +46,7 @@ document.getElementById('equals').addEventListener('click', () => {
 
 //clear button
 document.getElementById('clear').addEventListener('click', () => {
+
     calculation = '';
     display();
     localStorage.setItem('calculation', calculation);
@@ -66,7 +68,10 @@ document.addEventListener("keydown", (event) => {
     }
     if (key === 'Backspace') {
         event.preventDefault();
-        calculation = calculation.slice(0, -1);
+        if (calculation === 'Error') { calculation = ''; }
+        else {
+            calculation = calculation.slice(0, -1);
+        }
         display();
         localStorage.setItem('calculation', calculation);
         return;
