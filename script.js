@@ -5,7 +5,7 @@ display();
 //display function
 function display() {
     const displayElement = document.querySelector('.display-calculate');
-    displayElement.innerHTML = `${calculation}`;
+    displayElement.textContent = calculation || '';
     displayElement.scrollLeft = displayElement.scrollWidth;
 }
 
@@ -19,6 +19,13 @@ function updateCalculation(value) {
 
 //evaluate calculation
 function evaluateCalc() {
+    const trimmed = calculation.trim();
+    if(trimmed === ''){
+        calculation = '';
+        display();
+        return;
+    }
+
     try {
         calculation = eval(calculation);
         calculation = calculation.toString();
